@@ -15,6 +15,13 @@
  *= require_self
  */
 
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
+
 .container {
   max-width: 960px;
 }
@@ -80,3 +87,9 @@ img {
 a.card-image {
   color: #FFFFFF !important;
 }
+
+.inner {
+  width: 50%;
+  margin: 0 auto;
+}
+

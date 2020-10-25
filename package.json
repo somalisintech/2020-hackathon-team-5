@@ -1,5 +1,5 @@
 {
-  "name": "quaranteem",
+  "name": "quaranteam",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
@@ -8,9 +8,12 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
     "bootstrap": "^4.5.3",
+    "imports-loader": "^1.2.0",
     "jquery": "^3.5.1",
+    "lodash": "^4.17.20",
     "popper.js": "^1.16.1",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "underscore": "^1.11.0"
   },
   "version": "0.1.0",
   "devDependencies": {

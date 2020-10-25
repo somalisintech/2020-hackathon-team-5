@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'faq/index'
   get 'volunteer/index'
   get 'foodbank/index'
   get 'donate/new'

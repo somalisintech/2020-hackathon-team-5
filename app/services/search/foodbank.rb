@@ -33,6 +33,7 @@ module Search
         result[:post_code] = response["postcode"]
         result[:distance_mi] = response["distance_mi"]
         result[:charity_register_url] = response["charity_register_url"]
+        result[:email] = response["email"]
         result[:needs] = response["needs"].to_s
         result[:phone] = response["phone"]
         result[:address] = response["address"]

@@ -18,12 +18,12 @@
 
 <div class="mt-2">
   <% if @foodbank %>
-    <div class="row">
-      <div class="col-8">
+    <div class="inner">
+      <%# <div class="col-8"> %>
         <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">Distance/n(in miles)</th>
+              <th scope="col">How far from you(in miles)</th>
               <th scope="col">Food Bank Name</th>
               <th scope="col">Phone Number</th>
               <th scope="col">Address</th>
@@ -35,11 +35,11 @@
               <td><%= fb["distance_mi"] %></td>
               <td><%= link_to fb["name"], fb["url"], target: :_blank %></td>
               <td><%= fb["phone"] %></td>
-              <td><%= fb["address"] %></td>
+              <td><%= link_to fb["address"], "https://www.google.com/maps/search/?api=1Units+20-21%2C+Rovex+Business+Park+Hay+Hall+Road+Tyseley+Birmingham+B11+2AQ", target: :_blank %></td>
             </tr>
           <% end %> 
         </table>
-      </div>
+      <%# </div> %>
       <div>
       </div>
     </div>

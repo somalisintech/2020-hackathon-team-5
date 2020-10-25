@@ -26,6 +26,17 @@ module Search
       results(responses)
     end
 
+    def donate
+      postcode = sanitize_address
+      return unless postcode
+
+      uri = URI.parse("https://www.givefood.org.uk/api/1/foodbanks/search/?address=#{postcode}")
+      responses = HTTParty.get(uri)
+      return unless responses
+
+      need_results(responses)
+    end
+
     def sanitize_address
       pc = UKPostcode.parse(@search_query)
       @search_query if pc.valid?
@@ -56,6 +67,16 @@ module Search
         results << result
       end
       results
+    end
+
+    def need_results results
+      needs = []
+      results.each do |result|
+        per_foodbank = result[:needs]
+
+        needs << per_foodbank
+      end
+      needs
     end
   end
 end

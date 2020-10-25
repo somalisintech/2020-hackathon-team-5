@@ -19,16 +19,51 @@
     padding: 0;
   }
 </style>
-
+<%= Gon::Base.render_data %>
+<%# var initial_foodbanks = <%= @initial_foodbanks || 'boo'%>
+<%# var initFoodbanks = JSON.parse('<%= @initial_foodbanks.to_json.html_safe %1>'); %>
+<%# console.log(initial_foodbanks.first) %>
+<%# const place1 = { lat: initial_foodbanks.last["latt"], lng: initial_foodbanks.last["long"] }; %>
 <script>
-  let map;
+  <%# var foodbanks = gon.your_array; %>
+    <%# foodbank.forEach(initMap); %>
+    const uk = { lat: 51.5455, lng: 0.1628 };
 
   function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 55, lng: 0.1743 },
-      zoom: 5.8,
+    console.log(gon.your_array)
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 12,
+      center: uk,
     });
+    var foodbanks = gon.your_array;
+    foodbanks.forEach(perMarker);
+
+    function perMarker(item) {
+    const place1 = { lat: parseFloat(item["latt"]), lng: parseFloat(item["long"])};
+      const contentString =
+        '<div id="content">' +
+        '<div id="siteNotice">' +
+        "</div>" +
+        '<h1 id="firstHeading" class="firstHeading">'+ item["name"] +'</h1>' +
+        '<ul style="text-align:left">' +
+        '<li><b>phone number:</b>' + item["phone"] + '</li>' +
+        '<li><b>address:</b>' + item["address"] + '</li>' +
+        '</ul>' +
+        "</div>";
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+      });
+      const marker = new google.maps.Marker({
+        position: place1,
+        map,
+        title: "Place 1",
+      });
+      marker.addListener("click", () => {
+        infowindow.open(map, marker);
+      });
+    }
   }
+
 </script>
 
 <body>

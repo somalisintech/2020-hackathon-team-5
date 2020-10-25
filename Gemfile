@@ -22,6 +22,7 @@ gem 'foreman'
 gem 'uk_postcode'
 gem 'httparty'
 gem 'gmaps4rails'
+gem 'gon'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

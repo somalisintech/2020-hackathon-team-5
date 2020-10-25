@@ -8,6 +8,13 @@ module Search
       @search_query = params
     end
 
+    def initial_find
+      uri = URI.parse("https://www.givefood.org.uk/api/1/foodbanks/")
+      responses = HTTParty.get(uri)
+
+      results(responses)
+    end
+
     def find
       postcode = sanitize_address
       return unless postcode
@@ -29,7 +36,8 @@ module Search
       responses.each do |response|
         result = {}
         result[:name] = response["name"]
-        result[:latt_long] = response["latt_long"]
+        result[:latt] = response["latt_long"].split(",").first
+        result[:long] = response["latt_long"].split(",").last
         result[:post_code] = response["postcode"]
         result[:distance_mi] = response["distance_mi"]
         result[:charity_register_url] = response["charity_register_url"]
@@ -43,6 +51,7 @@ module Search
 
         results << result
       end
+      results
     end
   end
 end

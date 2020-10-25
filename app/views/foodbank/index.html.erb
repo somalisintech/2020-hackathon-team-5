@@ -32,10 +32,10 @@
           </tr>
           <% @foodbank.each do |fb| %>
             <tr>
-              <td><%= fb["distance_mi"] %></td>
-              <td><%= link_to fb["name"], fb["url"], target: :_blank %></td>
-              <td><%= fb["phone"] %></td>
-              <td><%= link_to fb["address"], "https://www.google.com/maps/search/?api=1Units+20-21%2C+Rovex+Business+Park+Hay+Hall+Road+Tyseley+Birmingham+B11+2AQ", target: :_blank %></td>
+              <td><%= fb[:distance_mi] %></td>
+              <td><%= link_to fb[:name], fb[:url], target: :_blank %></td>
+              <td><%= fb[:phone] %></td>
+              <td><%= link_to fb[:address], "https://www.google.com/maps/search/?api=1Units+20-21%2C+Rovex+Business+Park+Hay+Hall+Road+Tyseley+Birmingham+B11+2AQ", target: :_blank %></td>
             </tr>
           <% end %> 
         </table>

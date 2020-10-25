@@ -1,5 +1,5 @@
 
-# Book Explorer
+# The Camden Point
 
 The Camden Point is a search engine that offers a directory of the local services in the Camden borough. We connect all citizens of the Camden area to volunteer and donate to their local community.
 

@@ -1,11 +1,130 @@
+<div class="container">
+  <h1 class="volunteer-header">How can I help?</h1>
+</div>
+
+<div class="container d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+  <div class="volunteer-card mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden"
+       onclick="test()">
+    <div class="my-3 py-3">
+      <h2 class="display-5">Become a Driver</h2>
+      <p class="lead">Deliver essentials to your community.</p>
+    </div>
+    <%#= image_tag('community.svg') %>
+  </div>
+</div>
+<div class="container d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+  <div class="volunteer-card mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden"
+       onclick="test()">
+    <div class="my-3 py-3">
+      <h2 class="display-5">Become an Admin</h2>
+      <p class="lead">Manage the inner workings of your centre.</p>
+    </div>
+    <%#= image_tag('community.svg') %>
+  </div>
+</div>
+
+<div class="container d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+  <div class="volunteer-card mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden"
+       onclick="test()">
+    <div class="my-3 py-3">
+      <h2 class="display-5">Become a Fundraiser</h2>
+      <p class="lead">Grow the outreach potential of your local centres.</p>
+    </div>
+    <%#= image_tag('community.svg') %>
+  </div>
+</div>
+
+<div class="container">
+  <h1 class="volunteer-header">Where can I help?</h1>
+</div>
+
 <div class="inner mt-4">
-  <h1>How would you like to help?</h1>
-  <%= form_tag(volunteerSearch_path, :method => "get", :class=>"form-inline my-2 my-lg-0") do %>
+  <%= form_tag(volunteerSearch_path, :method => "get", :class => "form-inline my-2 my-lg-0") do %>
     <%= text_field_tag :volunteerSearch, params[:volunteerSearch], placeholder: "Search postcode/address", class: "form-control mr-sm-2" %>
 
     <span class="input-group-btn"> <%= submit_tag "Search", class: 'btn btn-info' %> </span>
   <% end %>
 
+
+</div>
+
+<div class="mt-2">
+  <% if @foodbank %>
+    <div class="inner">
+      <%# <div class="col-8"> %>
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">How far from you(in miles)</th>
+          <th scope="col">Food Bank Name</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Address</th>
+          <th scope="col">Drivers</th>
+          <th scope="col">Admin</th>
+          <th scope="col">Fundraising</th>
+        </tr>
+        </thead>
+        </tr>
+        <% @foodbank.each do |fb| %>
+          <tr>
+            <td><%= fb[:distance_mi] %></td>
+            <td><%= link_to fb[:name], fb[:url], target: :_blank %></td>
+            <td><%= fb[:phone] %></td>
+            <td><%= link_to fb[:address], "https://www.google.com/maps/search/?api=1Units+20-21%2C+Rovex+Business+Park+Hay+Hall+Road+Tyseley+Birmingham+B11+2AQ", target: :_blank %></td>
+            <% if fb[:driver] %>
+              <td>
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check" fill="green" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                </svg>
+              </td>
+            <% else %>
+              <td>
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-x" fill="red" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+              </td>
+            <% end %>
+            <% if fb[:admin] %>
+              <td>
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check" fill="green" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                </svg>
+              </td>
+            <% else %>
+              <td>
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-x" fill="red" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+              </td>
+            <% end %>
+            <% if fb[:fundraiser] %>
+              <td>
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check" fill="green" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                </svg>
+              </td>
+            <% else %>
+              <td>
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-x" fill="red" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+      <%# </div> %>
+      <div>
+      </div>
+    </div>
+  <% else %>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Give back to the community</h1>
+        <p class="lead">using the search bar above, search for centres in need of help near you.</p>
+      </div>
+  <% end %>
+  </div>
 </div>
 <% if @foodbank != nil %>
   <%= render 'shared/map' %>

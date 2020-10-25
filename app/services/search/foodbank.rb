@@ -3,7 +3,6 @@ require 'uri'
 
 module Search
   class Foodbank
-
     def initialize params
       @search_query = params
     end
@@ -48,11 +47,9 @@ module Search
         result[:closed] = response["closed"].to_s
         result[:updated_text] = response["updated_text"]
         result[:url] = response["url"]
-        result[:driver] = true
-        result[:admin] = true
-        result[:fundraiser] = true
-
-
+        result[:driver] = result[:name].length % 2 == 0
+        result[:admin] = result[:email].length % 2 == 0
+        result[:fundraiser] = result[:address].length % 2 == 0
         results << result
       end
       results

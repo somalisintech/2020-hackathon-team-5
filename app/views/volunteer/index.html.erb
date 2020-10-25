@@ -1,0 +1,14 @@
+<div class="inner mt-4">
+  <h1>How would you like to help?</h1>
+
+  <%# <form class="form-inline active-purple-3 active-purple-4"> %>
+    <%#   <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Enter your postcode" aria-label="Search"> %>
+    <%# </form> %>
+  <%= form_tag(search_path, :method => "get", :class=>"form-inline my-2 my-lg-0") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search postcode/address", class: "form-control mr-sm-2" %>
+
+    <span class="input-group-btn"> <%= submit_tag "Search", class: 'btn btn-info' %> </span>
+    <i class="fas fa-search" aria-hidden="true"></i>
+  <% end %>
+
+</div>

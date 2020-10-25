@@ -1,0 +1,94 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require bootstrap
+ *= require_tree .
+ *= require_self
+ */
+
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
+
+.container {
+  max-width: 960px;
+}
+
+footer {
+  background-color: #bed7f4;
+  width: 100vw;
+}
+
+/*
+ * Custom translucent site header
+ */
+
+.site-header {
+  background-color: #4189DDCC;
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: 8px 8px 8px 10px #4189DD44;
+}
+.site-header a {
+  color: #ddd;
+  transition: ease-in-out color .15s;
+}
+.site-header a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+img {
+  margin-bottom: 5%
+}
+
+.volunteer-card {
+  background-color: #4189DD;
+}
+
+.volunteer-card {
+  background-color: #4189DD;
+}
+
+/*
+ * Extra utilities
+ */
+
+.flex-equal > * {
+  -ms-flex: 1;
+  flex: 1;
+}
+@media (min-width: 768px) {
+  .flex-md-equal > * {
+    -ms-flex: 1;
+    flex: 1;
+  }
+}
+
+.overflow-hidden { overflow: hidden; }
+
+.card-image {
+  width: 30vw;
+  /*transform: rotate(180deg); !* Equal to rotateZ(45deg) *!*/
+}
+
+a.card-image {
+  color: #FFFFFF !important;
+}
+
+.inner {
+  width: 50%;
+  margin: 0 auto;
+}

@@ -33,10 +33,10 @@
             <% end %>
           </table>
         </div>
-        <div class="card mb-5 donation-list">
+        <div class="mb-5 donation-list bg-light">
           <div id="donation" style="display: none;" class="ml-3">
           </div>
-          <div id="empty-donation" class="ml-3">
+          <div id="empty-donation" class="ml-3 text-center">
             <h1> Willing to make a donation?</h1>
             <p> Click on one of the rows to found out what to donate</p>
           </div>
@@ -78,6 +78,7 @@
     function createDonateButton() {
         var btn = document.createElement("BUTTON");
         btn.innerHTML = "Donate";
+        btn.className = "btn btn-outline-primary";
         document.getElementById("donation").appendChild(btn);
     }
 

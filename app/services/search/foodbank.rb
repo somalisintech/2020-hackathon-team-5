@@ -48,6 +48,10 @@ module Search
         result[:closed] = response["closed"].to_s
         result[:updated_text] = response["updated_text"]
         result[:url] = response["url"]
+        result[:driver] = true
+        result[:admin] = true
+        result[:fundraiser] = true
+
 
         results << result
       end

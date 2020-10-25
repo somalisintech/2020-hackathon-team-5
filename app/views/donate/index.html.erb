@@ -1,1 +1,79 @@
-<h1>Insert Donate info here</h1>
+<div class="inner mt-4">
+  <h1>Places near you where you can donate</h1>
+
+  <%= form_tag(donateSearch_path, :method => "get", :class=>"form-inline my-2 my-lg-0") do %>
+    <%= text_field_tag :search, params[:donateSearch], placeholder: "postcode e.g", class: "form-control mr-sm-2" %>
+
+    <span class="input-group-btn"> <%= submit_tag "Search", class: 'btn btn-info' %> </span>
+  <% end %>
+</div>
+
+<div class="mt-2">
+  <% if @foodbank %>
+    <div class="row">
+      <div class="col-8 ml-2">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">How far from you(in miles)</th>
+              <th scope="col">Food Bank Name</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Address</th>
+            </tr>
+          </thead>
+          </tr>
+          <% @foodbank.each do |fb| %>
+            <tr onclick="openDonation()">
+              <td><%= fb[:distance_mi] %></td>
+              <td><%= link_to fb[:name], fb[:url], target: :_blank %></td>
+              <td><%= fb[:phone] %></td>
+              <td><%= fb[:address]%></td>
+            </tr>
+          <% end %> 
+        </table>
+      </div>
+      <div class="card mb-5">
+        <div id="donation" style="display: none;" class="ml-3" >
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Help those around you</h1>
+        <p class="lead">by donating, search for your nearest food doners and click to see what they'll need to have donated</p>
+      </div>
+    <% end %>
+    </div>
+</div>
+
+<script>
+  function openDonation() {
+    clearPrevDonations();
+    addDonations();
+    var x = document.getElementById("donation");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  } 
+  function addDonations() {
+    var node = document.createElement("li");                 // Create a <li> node
+    var textnode = document.createTextNode("Water");         // Create a text node
+    node.appendChild(textnode);                              // Append the text to <li>
+    document.getElementById("donation").appendChild(node);     // Append <li> to <ul> with id="myList" 
+  } 
+
+  function clearPrevDonations(){
+    var div = document.getElementById("donation");
+    while(div.firstChild) { 
+      div.removeChild(div.firstChild); 
+    } 
+    var node = document.createElement("h1");                 // Create a <li> node
+    var textnode = document.createTextNode("Donation checklist:");         // Create a text node
+    node.appendChild(textnode);                              // Append the text to <li>
+    document.getElementById("donation").appendChild(node);     // Append <li> to <ul> with id="myList" 
+    document.getElementById("donation").style.padding = "10px 20px 20px 30px"; 
+  } 
+</script>

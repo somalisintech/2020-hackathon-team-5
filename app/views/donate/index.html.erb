@@ -2,7 +2,7 @@
   <h1>Places near you where you can donate</h1>
 
   <%= form_tag(donateSearch_path, :method => "get", :class=>"form-inline my-2 my-lg-0") do %>
-    <%= text_field_tag :search, params[:donateSearch], placeholder: "postcode e.g", class: "form-control mr-sm-2" %>
+    <%= text_field_tag :donateSearch, params[:donateSearch], placeholder: "postcode e.g", class: "form-control mr-sm-2" %>
 
     <span class="input-group-btn"> <%= submit_tag "Search", class: 'btn btn-info' %> </span>
   <% end %>

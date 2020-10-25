@@ -1,8 +1,8 @@
 <div class="inner mt-4">
   <h1>Places near you where you can donate</h1>
 
-  <%= form_tag(donateSearch_path, :method => "get", :class=>"form-inline my-2 my-lg-0") do %>
-    <%= text_field_tag :donateSearch, params[:donateSearch], placeholder: "postcode e.g", class: "form-control mr-sm-2" %>
+  <%= form_tag(donateSearch_path, :method => "get", :class => "form-inline my-2 my-lg-0") do %>
+    <%= text_field_tag :donateSearch, params[:donateSearch], placeholder: "Search postcode e.g: WC1B", class: "form-control mr-sm-2" %>
 
     <span class="input-group-btn"> <%= submit_tag "Search", class: 'btn btn-info' %> </span>
   <% end %>
@@ -11,35 +11,35 @@
 <div class="mt-2">
   <% if @foodbank %>
     <div class="row">
-      <div class="col-8 ml-5">
-        <table class="table table-hover">
-          <thead>
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="col-8 ml-5">
+          <table class="table table-hover">
+            <thead>
             <tr>
               <th scope="col">How far from you(in miles)</th>
               <th scope="col">Food Bank Name</th>
               <th scope="col">Phone Number</th>
               <th scope="col">Address</th>
             </tr>
-          </thead>
-          </tr>
-          <% @foodbank.each do |fb| %>
-            <tr onclick="openDonation(this)">
-              <td><%= fb[:distance_mi] %></td>
-              <td><%= link_to fb[:name], fb[:url], target: :_blank %></td>
-              <td><%= fb[:phone] %></td>
-              <td><%= fb[:address]%></td>
+            </thead>
             </tr>
-          <% end %> 
-        </table>
-      </div>
-      <div class="card mb-5">
-        <div id="donation" style="display: none;" class="ml-3" >
+            <% @foodbank.each do |fb| %>
+              <tr onclick="openDonation(this)">
+                <td><%= fb[:distance_mi] %></td>
+                <td><%= link_to fb[:name], fb[:url], target: :_blank %></td>
+                <td><%= fb[:phone] %></td>
+                <td><%= fb[:address] %></td>
+              </tr>
+            <% end %>
+          </table>
         </div>
-      </div>
-      <div class="card mb-5">
-        <div id="empty-donation" style="padding: 110px 20px 20px 30px;" class="ml-3" >
-          <h1> Willing to make a donation?</h1>
-          <p> Click on one of the rows to found out what to donate</p>
+        <div class="card mb-5 donation-list">
+          <div id="donation" style="display: none;" class="ml-3">
+          </div>
+          <div id="empty-donation" class="ml-3">
+            <h1> Willing to make a donation?</h1>
+            <p> Click on one of the rows to found out what to donate</p>
+          </div>
         </div>
       </div>
     </div>
@@ -47,74 +47,75 @@
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-4">Help those around you</h1>
-        <p class="lead">by donating, search for your nearest food doners and click to see what they'll need to have donated</p>
+        <p class="lead">by donating, search for your nearest food doners and click to see what they'll need to have
+          donated</p>
       </div>
-    <% end %>
-    </div>
+  <% end %>
+  </div>
 </div>
 
 <%= Gon::Base.render_data %>
 
 <script>
-  function openDonation(row) {
-    clearPrevDonations();
-    var selected_foodbank = gon.your_array[row.rowIndex - 1];
-    var foodbank_items = selected_foodbank.split('\n');
-    if (foodbank_items.length > 14) foodbank_items.length = 14;
-    foodbank_items.forEach(addDonations);
-    createDonateButton();
-    var x = document.getElementById("donation");
-    var y = document.getElementById("empty-donation");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-      y.style.display = "none";
-    } else {
-      x.style.display = "block";
-      y.style.display = "none";
+    function openDonation(row) {
+        clearPrevDonations();
+        var selected_foodbank = gon.your_array[row.rowIndex - 1];
+        var foodbank_items = selected_foodbank.split('\n');
+        if (foodbank_items.length > 14) foodbank_items.length = 14;
+        foodbank_items.forEach(addDonations);
+        createDonateButton();
+        var x = document.getElementById("donation");
+        var y = document.getElementById("empty-donation");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            y.style.display = "none";
+        } else {
+            x.style.display = "block";
+            y.style.display = "none";
+        }
     }
-  } 
 
-  function createDonateButton() {
-    var btn = document.createElement("BUTTON");
-    btn.innerHTML = "Donate";
-    document.getElementById("donation").appendChild(btn);
-  }
-
-  function addDonations(donate_item, index) {
-
-    var row = document.createElement("DIV");
-    row.setAttribute("id", "rowsie" + index);
-    document.getElementById("donation").appendChild(row);
-
-
-    var checkbox = document.createElement("INPUT");
-    checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute("id", "checkbox" + index);
-    document.getElementById("rowsie" + index).appendChild(checkbox);
-
-    var node = document.createElement("LABEL");
-    var chr_length = donate_item.length;
-    item = donate_item;
-    if(chr_length > 36){
-      var item = donate_item.slice(0,37) + ".."
+    function createDonateButton() {
+        var btn = document.createElement("BUTTON");
+        btn.innerHTML = "Donate";
+        document.getElementById("donation").appendChild(btn);
     }
-    if(item == "Unknown"){
-      var item = "nothing to donate for now."
-    }
-    var textnode = document.createTextNode(item);
-    node.appendChild(textnode);
-    document.getElementById("rowsie" + index).appendChild(node);
-  } 
 
-  function clearPrevDonations(){
-    var div = document.getElementById("donation");
-    while(div.firstChild) { 
-      div.removeChild(div.firstChild); 
-    } 
-    var node = document.createElement("h1");
-    var textnode = document.createTextNode("Items you can donate");
-    node.appendChild(textnode);
-    document.getElementById("donation").appendChild(node);
-    document.getElementById("donation").style.padding = "10px 20px 20px 30px"; 
-  } 
+    function addDonations(donate_item, index) {
+
+        var row = document.createElement("DIV");
+        row.setAttribute("id", "rowsie" + index);
+        document.getElementById("donation").appendChild(row);
+
+
+        var checkbox = document.createElement("INPUT");
+        checkbox.setAttribute("type", "checkbox");
+        checkbox.setAttribute("id", "checkbox" + index);
+        document.getElementById("rowsie" + index).appendChild(checkbox);
+
+        var node = document.createElement("LABEL");
+        var chr_length = donate_item.length;
+        item = donate_item;
+        if (chr_length > 36) {
+            var item = donate_item.slice(0, 37) + ".."
+        }
+        if (item == "Unknown") {
+            var item = "nothing to donate for now."
+        }
+        var textnode = document.createTextNode(item);
+        node.appendChild(textnode);
+        document.getElementById("rowsie" + index).appendChild(node);
+    }
+
+    function clearPrevDonations() {
+        var div = document.getElementById("donation");
+        while (div.firstChild) {
+            div.removeChild(div.firstChild);
+        }
+        var node = document.createElement("h1");
+        var textnode = document.createTextNode("Items you can donate");
+        node.appendChild(textnode);
+        document.getElementById("donation").appendChild(node);
+        document.getElementById("donation").style.padding = "10px 20px 20px 30px";
+    }
 </script>

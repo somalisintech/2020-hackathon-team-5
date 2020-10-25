@@ -27,11 +27,16 @@
 <script>
   <%# var foodbanks = gon.your_array; %>
     <%# foodbank.forEach(initMap); %>
-    const uk = { lat: 51.5455, lng: 0.1628 };
+
+    let uk = { lat: 51.5262924, lng: -0.1530155 };
+
+  if(gon.your_array.length < 11 ){
+    uk = { lat: parseFloat(gon.your_array[0]["latt"]), lng: parseFloat(gon.your_array[0]["long"]) };
+  }
 
   function initMap() {
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 12,
+      zoom: 13,
       center: uk,
     });
     var foodbanks = gon.your_array;

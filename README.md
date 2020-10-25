@@ -1,24 +1,21 @@
-# The Camden Point
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Book Explorer
 
-Things you may want to cover:
+The Camden Point is a search engine that offers a directory of the local services in the Camden borough. We connect all citizens of the Camden area to volunteer and donate to their local community.
 
-* Ruby version
+  - https://thecamdenpoint.herokuapp.com
 
-* System dependencies
+## Clone the repository
 
-* Configuration
+```shell
+git clone https://github.com/somalisintech/2020-hackathon-team-5.git
+cd book-explorer
+```
+check you have [Ruby 2.6.6](https://www.ruby-lang.org/en/news/2019/04/17/ruby-2-6-3-released/)
 
-* Database creation
 
-* Database initialization
+# Usage
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The application can be tested locally. After downloading the repository, run bundle install and download all dependencies. Then run 
+`rake db:create db:migrate` 
+After that, run `bundle exec rails server` and also `bundle exec bin/webpack-dev-server` and the application will begin running on localhost:3000.
